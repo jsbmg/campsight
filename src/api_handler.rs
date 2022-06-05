@@ -17,5 +17,6 @@ pub async fn request(url: &str, user_agent: &str, params: &str)
         .text()
         .await?;
 
+    println!("{:?}", body);
     Ok(body)
 }

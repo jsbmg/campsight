@@ -15,8 +15,8 @@ async fn index() {
 
 #[launch]
 fn rocket() -> _ {
-    println!("{:?}", relative!("client/.next/public"));
+    println!("{:?}", relative!("client/.next"));
     rocket::build()
-        .mount("/", routes![index])
-        .mount("/", FileServer::from(relative!("client/.next/static")))
+//        .mount("/", routes![index])
+        .mount("/", FileServer::from(relative!("client/out")))
 }

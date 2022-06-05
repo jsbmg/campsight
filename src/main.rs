@@ -9,14 +9,15 @@ const USER_AGENT: &str = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 const URL: &str = "https://www.recreation.gov/api/camps/availability/campground/272300/month?";
 
 #[get("/")]
-async fn index() {
+async fn index() -> String {
+    let params = &("start_date=".to_string() + DATE);
+    return api_handler::request(URL, USER_AGENT, params).await.unwrap();
 }
-
 
 #[launch]
 fn rocket() -> _ {
     println!("{:?}", relative!("client/.next"));
     rocket::build()
-//        .mount("/", routes![index])
-        .mount("/", FileServer::from(relative!("client/out")))
+        .mount("/", FileServer::from(relative!("client/dist")))
+        .mount("/api", routes![index])
 }

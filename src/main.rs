@@ -17,6 +17,6 @@ async fn index() -> String {
 #[launch]
 fn rocket() -> _ {
     rocket::build()
-        .mount("/", FileServer::from(relative!("client/dist")))
+//        .mount("/", FileServer::from(relative!("client/dist")))
         .mount("/api", routes![index])
 }
